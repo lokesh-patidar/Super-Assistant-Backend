@@ -3,13 +3,14 @@ const CategoryQuestion = require("../Models/CategoryQuestionModel");
 const ErrorHandler = require("../Utils/ErrorHandler");
 
 exports.createCategoryQuestion = catchError(async (req, res, next) => {
-     const { questionText, media, categories, options } = req.body;
+     const { questionText, media, categories, options, points } = req.body;
 
      const newCategoryQuestion = new CategoryQuestion({
           questionText,
           media,
-          categories,
-          options
+          categories: categories.split(","),
+          options: JSON.parse(options),
+          points,
      });
 
      const savedCategoryQuestion = await newCategoryQuestion.save();

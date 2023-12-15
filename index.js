@@ -8,6 +8,10 @@ const clozeQuestionRoutes = require('./Routes/clozeQuestionsRoute');
 const comprehensionQuestionRoutes = require('./Routes/comprehensionQuestionsRoute');
 const app = express();
 
+const multer = require('multer');
+const upload = multer();
+app.use(upload.none());
+
 app.use(express.json());
 
 app.use(cors({

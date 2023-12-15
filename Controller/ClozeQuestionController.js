@@ -8,7 +8,7 @@ exports.createClozeQuestion = catchError(async (req, res, next) => {
      const newClozeQuestion = new ClozeQuestion({
           questionText,
           media,
-          options,
+          options: options.split(","),
           points,
           feedback,
      });

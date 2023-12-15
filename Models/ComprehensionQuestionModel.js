@@ -1,29 +1,60 @@
 const mongoose = require('mongoose');
 
-const ComprehensionQuestionSchema = new mongoose.Schema({
-  questionType: {
+
+// Define the options schema for MCQ and MCA questions
+const OptionSchema = new mongoose.Schema({
+  text: {
     type: String,
-    enum: ['MCA', 'MCQ', 'ShortText'],
     required: true
   },
-  media: {
-    type: String // Adjust this field for media information
-  },
+  isCorrect: {
+    type: Boolean,
+    default: false
+  }
+});
+
+
+
+const MCQQuestionSchema = new mongoose.Schema({
   questionText: {
     type: String,
-    required: [true, 'Question text is required!'],
+    required: true
   },
-  options: [String], // For MCQ and MCA types to store options
-  correctAnswer: String, // For MCQ and MCA to store the correct answer
-  // Specific fields for each question type
-  // MCA specific fields
-  explanation: String, // Explanation for the answer (for MCA)
-  // MCQ specific fields
-  // Any additional fields specific to MCQ type
-  // Short Text specific fields
-  maxLength: Number // Maximum length allowed for the answer (for ShortText)
-  // Any other specific fields for ShortText type
-}, { timestamps: true });
+  options: [OptionSchema] // Array of options (OptionSchema)
+});
+
+
+
+// Define the schema for MCA questions
+const MCAQuestionSchema = new mongoose.Schema({
+  questionText: {
+    type: String,
+    required: true
+  },
+  options: [OptionSchema] // Array of options (OptionSchema)
+});
+
+
+
+// Define the schema for the comprehension question
+const ComprehensionQuestionSchema = new mongoose.Schema({
+  passage: {
+    type: String,
+    required: true
+  },
+  mcqQuestions: [MCQQuestionSchema], // Array of MCQ questions
+  mcaQuestions: [MCAQuestionSchema], // Array of MCA questions
+  shortAnswerQuestions: [{
+    questionText: {
+      type: String,
+      required: true
+    },
+    answer: {
+      type: String,
+      required: true
+    }
+  }] // Array of short answer questions
+});
 
 const ComprehensionQuestion = mongoose.model('ComprehensionQuestion', ComprehensionQuestionSchema);
 
