@@ -21,7 +21,6 @@ exports.createComprehensionQuestion = catchError(async (req, res, next) => {
           shortAnswerQuestions: JSON.parse(shortAnswerQuestions),
      });
 
-     // Save the new comprehension question to the database
      const savedQuestion = await newQuestion.save();
      res.status(201).json({ success: true, savedQuestion });
 });

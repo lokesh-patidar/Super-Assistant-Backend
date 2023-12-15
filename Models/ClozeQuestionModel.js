@@ -15,7 +15,7 @@ const ClozeQuestionSchema = new mongoose.Schema({
      options: [String],
      points: {
           type: Number,
-          default: 0 // You can adjust the default value as needed
+          default: 0,
      },
      feedback: String,
 }, { timestamps: true });
