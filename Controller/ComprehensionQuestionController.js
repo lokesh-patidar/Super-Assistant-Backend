@@ -3,18 +3,26 @@ const ComprehensionQuestion = require("../Models/ComprehensionQuestionModel");
 const ErrorHandler = require("../Utils/ErrorHandler");
 
 exports.createComprehensionQuestion = catchError(async (req, res, next) => {
-     const { passage, mcqQuestions, mcaQuestions, shortAnswerQuestions } = req.body;
-
-     // Create a new instance of the ComprehensionQuestion model
-     const newComprehensionQuestion = new ComprehensionQuestion({
+     const {
           passage,
+          media,
+          points,
           mcqQuestions,
           mcaQuestions,
           shortAnswerQuestions
+     } = req.body;
+
+     const newQuestion = new ComprehensionQuestion({
+          passage,
+          media,
+          points,
+          mcqQuestions: JSON.parse(mcqQuestions),
+          mcaQuestions: JSON.parse(mcaQuestions),
+          shortAnswerQuestions: JSON.parse(shortAnswerQuestions),
      });
 
      // Save the new comprehension question to the database
-     const savedQuestion = await newComprehensionQuestion.save();
+     const savedQuestion = await newQuestion.save();
      res.status(201).json({ success: true, savedQuestion });
 });
 

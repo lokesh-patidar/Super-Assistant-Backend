@@ -20,6 +20,10 @@ const MCQQuestionSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  points: {
+    type: Number,
+    default: 0,
+  },
   options: [OptionSchema] // Array of options (OptionSchema)
 });
 
@@ -30,6 +34,10 @@ const MCAQuestionSchema = new mongoose.Schema({
   questionText: {
     type: String,
     required: true
+  },
+  points: {
+    type: Number,
+    default: 0,
   },
   options: [OptionSchema] // Array of options (OptionSchema)
 });
@@ -42,9 +50,20 @@ const ComprehensionQuestionSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  media: {
+    type: String // Adjust this field for media information
+  },
+  points: {
+    type: Number,
+    default: 0,
+  },
   mcqQuestions: [MCQQuestionSchema], // Array of MCQ questions
   mcaQuestions: [MCAQuestionSchema], // Array of MCA questions
   shortAnswerQuestions: [{
+    points: {
+      type: Number,
+      default: 0,
+    },
     questionText: {
       type: String,
       required: true
