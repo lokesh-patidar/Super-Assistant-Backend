@@ -51,7 +51,7 @@ const ComprehensionQuestionSchema = new mongoose.Schema({
     required: true
   },
   media: {
-    type: String // Adjust this field for media information
+    type: String
   },
   points: {
     type: Number,
@@ -72,7 +72,7 @@ const ComprehensionQuestionSchema = new mongoose.Schema({
       type: String,
       required: true
     }
-  }] // Array of short answer questions
+  }]
 });
 
 const ComprehensionQuestion = mongoose.model('ComprehensionQuestion', ComprehensionQuestionSchema);
