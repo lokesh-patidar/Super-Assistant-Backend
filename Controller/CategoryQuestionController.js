@@ -14,7 +14,7 @@ exports.createCategoryQuestion = catchError(async (req, res, next) => {
      });
 
      const savedCategoryQuestion = await newCategoryQuestion.save();
-     res.status(201).json({ success: true, savedCategoryQuestion });
+     res.status(201).json({ success: true, message: "Category question added", savedCategoryQuestion });
 });
 
 
